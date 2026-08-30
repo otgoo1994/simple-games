@@ -1,0 +1,559 @@
+@use './utils' as *;
+@use './colors' as *;
+@use './fonts.scss';
+
+.home {
+  @include vw-convert-desktop(padding, 20px 0);
+
+  @include mobile {
+    @include vw-convert-mobile(padding, 30px 0);
+  }
+}
+.card__link {
+  text-decoration: none;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  @include vw-convert-desktop(gap, 8px);
+
+  @include mobile {
+    @include vw-convert-mobile(gap, 8px);
+  }
+
+  &__thumb-wrap {
+    aspect-ratio: 4/6;
+    background-color: $slate-100;
+    // @include vw-convert-desktop(border-radius, 14px);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid $slate-200;
+
+    @include mobile {
+      // @include vw-convert-mobile(border-radius, 14px);
+    }
+
+    &-chapter-title {
+      position: absolute;
+      @include vw-convert-desktop(padding, 2px 10px);
+      @include vw-convert-desktop(border-top-right-radius, 10px);
+      @include vw-convert-desktop(border-bottom-right-radius, 10px);
+      // width: 50%;
+      background-color: $slate-900;
+      @include vw-convert-desktop(top, 15px);
+      @include vw-convert-desktop(left, 0px);
+      @include vw-convert-desktop(font-size, 15px);
+      color: $webtoon-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+      font-weight: 900;
+
+      @include mobile {
+        @include vw-convert-mobile(padding, 5px 15px);
+        @include vw-convert-mobile(font-size, 24px);
+        @include vw-convert-mobile(top, 15px);
+        @include vw-convert-mobile(border-top-right-radius, 10px);
+        @include vw-convert-mobile(border-bottom-right-radius, 10px);
+      }
+    }
+
+    &-chapter-adult-title {
+      position: absolute;
+      @include vw-convert-desktop(padding, 2px 10px);
+      @include vw-convert-desktop(border-top-left-radius, 10px);
+      @include vw-convert-desktop(border-bottom-left-radius, 10px);
+      // width: 50%;
+      background-color: $slate-900;
+      @include vw-convert-desktop(top, 15px);
+      @include vw-convert-desktop(right, 0px);
+      @include vw-convert-desktop(font-size, 15px);
+      color: $red;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+      font-weight: 900;
+
+      @include mobile {
+        @include vw-convert-mobile(padding, 5px 15px);
+        @include vw-convert-mobile(font-size, 24px);
+        @include vw-convert-mobile(top, 15px);
+        @include vw-convert-mobile(right, 0px);
+        @include vw-convert-mobile(border-top-left-radius, 10px);
+        @include vw-convert-mobile(border-bottom-left-radius, 10px);
+      }
+    }
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+
+    .card:hover & {
+      transform: scale(1.05);
+    }
+
+    &.sensitive {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: blur(5px);
+      transform: scale(1.05);
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    @include vw-convert-desktop(top, 8px);
+    @include vw-convert-desktop(left, 8px);
+    background-color: $webtoon-color;
+    color: $white;
+    @include vw-convert-desktop(font-size, 9px);
+    font-weight: 700;
+    @include vw-convert-desktop(padding, 2px 6px);
+    @include vw-convert-desktop(gap, 4px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+    @include mobile {
+      @include vw-convert-mobile(top, 8px);
+      @include vw-convert-mobile(left, 8px);
+      @include vw-convert-mobile(font-size, 9px);
+      @include vw-convert-mobile(padding, 2px 6px);
+      @include vw-convert-mobile(gap, 4px);
+    }
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(1px);
+
+    .card:hover & {
+      opacity: 1;
+    }
+
+    &-btn {
+      background-color: $webtoon-color;
+      border: none;
+      color: $white;
+      cursor: pointer;
+      @include vw-convert-desktop(width, 100px);
+      @include vw-convert-desktop(padding, 12px 0px);
+      border-radius: 9999px;
+      font-weight: 900;
+      @include vw-convert-desktop(font-size, 10px);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transform: translateY(0.5rem);
+      transition: all 0.2s;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+      @include mobile {
+        @include vw-convert-mobile(width, 200px);
+        @include vw-convert-mobile(padding, 20px 0px);
+        @include vw-convert-mobile(font-size, 20px);
+      }
+
+      .card:hover & {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  &__info {
+    @include vw-convert-desktop(padding, 0 4px);
+
+    @include mobile {
+      @include vw-convert-mobile(padding, 0 4px);
+    }
+  }
+
+  &__title {
+    @include vw-convert-desktop(font-size, 20px);
+    font-weight: 900;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.2s;
+    color: $slate-700;
+    @include mobile {
+      @include vw-convert-mobile(font-size, 20px);
+    }
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    @include vw-convert-desktop(gap, 10px);
+    @include vw-convert-desktop(margin-top, 4px);
+    overflow: hidden;
+
+    @include mobile {
+      @include vw-convert-mobile(gap, 10px);
+      @include vw-convert-mobile(margin-top, 4px);
+    }
+
+    &-genre {
+      font-weight: 700;
+      color: $webtoon-color;
+      text-transform: uppercase;
+      @include vw-convert-desktop(font-size, 12px);
+
+      @include mobile {
+        @include vw-convert-mobile(font-size, 16px);
+      }
+    }
+
+    &-count {
+      font-weight: 700;
+      color: $red;
+      text-transform: uppercase;
+      @include vw-convert-desktop(font-size, 12px);
+      @include vw-convert-desktop(margin-top, 5px);
+
+      @include mobile {
+        @include vw-convert-mobile(font-size, 16px);
+      }
+    }
+  }
+}
+
+.schedule {
+  @include vw-convert-desktop(padding-top, 30px);
+  background-color: $white;
+
+  @include mobile {
+    @include vw-convert-mobile(padding-top, 50px);
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    @include vw-convert-desktop(margin-bottom, 10px);
+    @include vw-convert-desktop(padding-bottom, 5px);
+    border-bottom: 1px solid $slate-100;
+
+    @include mobile {
+      @include vw-convert-mobile(margin-bottom, 10px);
+      @include vw-convert-mobile(padding-bottom, 5px);
+    }
+  }
+
+  &__title-group {
+    display: flex;
+    align-items: flex-start;
+    @include vw-convert-desktop(gap, 5px);
+    flex-direction: column;
+    flex-grow: 1;
+
+    @include mobile {
+      @include vw-convert-mobile(gap, 5px);
+      max-width: 75%;
+    }
+
+    .tab-container {
+      overflow: hidden;
+      width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+  }
+
+  &__title {
+    @include vw-convert-desktop(font-size, 30px);
+    @include vw-convert-desktop(letter-spacing, -1px);
+    font-weight: 900;
+
+    @include mobile {
+      @include vw-convert-mobile(font-size, 30px);
+      @include vw-convert-mobile(letter-spacing, -1px);
+    }
+    // text-transform: uppercase;
+  }
+
+  &__tabs {
+    display: flex;
+    @include vw-convert-desktop(gap, 5px);
+    @include vw-convert-desktop(padding, 5px 0);
+    border-radius: 9999px;
+
+    @include mobile {
+      @include vw-convert-mobile(gap, 5px);
+      @include vw-convert-mobile(padding, 5px 0);
+    }
+  }
+
+  &__tab {
+    @include vw-convert-desktop(padding, 10px 20px);
+    @include vw-convert-desktop(font-size, 12px);
+    cursor: pointer;
+    font-weight: 900;
+    border-radius: 9999px;
+    transition: all 0.2s;
+    color: $slate-400;
+    border: none;
+
+    @include mobile {
+      @include vw-convert-mobile(padding, 10px 20px);
+      @include vw-convert-mobile(font-size, 20px);
+    }
+
+    &:hover {
+      color: $slate-600;
+    }
+
+    &--active {
+      background-color: $slate-900;
+      color: $white;
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+
+  &__view-all {
+    color: $webtoon-color;
+    border: none;
+    @include vw-convert-desktop(font-size, 14px);
+    font-weight: 900;
+    text-transform: uppercase;
+    background-color: transparent;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    @include mobile {
+      @include vw-convert-mobile(font-size, 20px);
+    }
+  }
+
+  &__grid {
+    // display: grid;
+    // grid-template-columns: repeat(2, 1fr);
+    // @media (min-width: 640px) {
+    //   grid-template-columns: repeat(3, 1fr);
+    // }
+    // @media (min-width: 768px) {
+    //   grid-template-columns: repeat(4, 1fr);
+    // }
+    // @media (min-width: 1024px) {
+    //   grid-template-columns: repeat(6, 1fr);
+    // }
+    // gap: 2rem;
+  }
+}
+
+.blurred-background {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  &-body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .blurred-modal {
+      width: 30%;
+      // aspect-ratio: 2/1;
+      background-color: $white;
+      position: relative;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      @include vw-convert-desktop(border-radius, 10px);
+      @include vw-convert-desktop(padding, 80px 0);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      @include mobile {
+        width: 80%;
+        @include vw-convert-mobile(border-radius, 20px);
+        @include vw-convert-mobile(padding, 100px 0);
+      }
+
+      .blurred-close {
+        position: absolute;
+        @include vw-convert-desktop(top, 10px);
+        @include vw-convert-desktop(right, 10px);
+        @include vw-convert-desktop(width, 50px);
+        aspect-ratio: 1;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+
+        svg {
+          width: 80%;
+          height: 80%;
+        }
+
+        @include mobile {
+          @include vw-convert-mobile(top, 10px);
+          @include vw-convert-mobile(right, 10px);
+          @include vw-convert-mobile(width, 80px);
+        }
+      }
+
+      .blurred-content {
+        @include vw-convert-desktop(padding, 0 50px);
+        text-align: center;
+
+        @include mobile {
+          @include vw-convert-mobile(padding, 0 50px);
+        }
+
+        p {
+          font-weight: 700;
+          @include vw-convert-desktop(font-size, 25px);
+          @include vw-convert-desktop(margin-bottom, 15px);
+
+          @include mobile {
+            @include vw-convert-mobile(font-size, 25px);
+            @include vw-convert-mobile(margin-bottom, 15px);
+          }
+        }
+
+        .donate-thankful {
+          @include vw-convert-desktop(font-size, 18px);
+          font-weight: 700;
+        }
+
+        .donate-fun-description {
+          @include vw-convert-desktop(margin-top, 20px);
+        }
+
+        .image-container {
+          @include vw-convert-desktop(padding-top, 10px);
+          display: flex;
+          justify-content: center;
+          .pay-image {
+            width: 60%;
+            height: auto;
+          }
+
+          @include mobile {
+            display: none;
+          }
+        }
+
+        .app-container {
+          display: none;
+
+          @include mobile {
+            @include vw-convert-mobile(margin-top, 30px);
+            @include vw-convert-mobile(padding, 30px 0);
+            @include vw-convert-mobile(gap, 10px);
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            max-height: 30vh;
+            overflow: hidden;
+            overflow-y: auto;
+            scrollbar-width: none;
+          }
+
+          &-row {
+            display: flex;
+            align-items: center;
+            @include vw-convert-mobile(gap, 20px);
+            background-color: $slate-800;
+            @include vw-convert-mobile(padding, 10px);
+            @include vw-convert-mobile(border-radius, 20px);
+            position: relative;
+
+            .app-logo {
+              @include vw-convert-mobile(width, 60px);
+              height: auto;
+              aspect-ratio: 1;
+            }
+
+            p {
+              color: $slate-100;
+            }
+
+            svg {
+              color: $white;
+              position: absolute;
+              @include vw-convert-mobile(right, 10px);
+            }
+          }
+        }
+      }
+
+      .blurred-button {
+        display: flex;
+        @include vw-convert-desktop(margin-top, 20px);
+        @include vw-convert-desktop(gap, 10px);
+
+        @include mobile {
+          @include vw-convert-mobile(margin-top, 20px);
+          @include vw-convert-mobile(gap, 10px);
+        }
+
+        button {
+          border: none;
+          @include vw-convert-desktop(padding, 20px);
+          @include vw-convert-mobile(border-radius, 2px);
+          cursor: pointer;
+
+          @include mobile {
+            @include vw-convert-mobile(padding, 20px);
+            @include vw-convert-mobile(border-radius, 10px);
+          }
+
+          &.confirm {
+            background-color: $red;
+            color: $white;
+          }
+        }
+      }
+
+      .blurred-check {
+        display: flex;
+        @include vw-convert-desktop(margin-top, 20px);
+        @include vw-convert-desktop(gap, 10px);
+        @include vw-convert-desktop(font-size, 15px);
+
+        @include mobile {
+          @include vw-convert-mobile(margin-top, 20px);
+          @include vw-convert-mobile(gap, 10px);
+          @include vw-convert-mobile(font-size, 25px);
+        }
+
+        input {
+          @include vw-convert-desktop(width, 20px);
+          @include vw-convert-desktop(height, 20px);
+          cursor: pointer;
+          accent-color: #ff4d4f;
+
+          @include mobile {
+            @include vw-convert-mobile(width, 30px);
+            @include vw-convert-mobile(height, 30px);
+          }
+        }
+      }
+    }
+  }
+}

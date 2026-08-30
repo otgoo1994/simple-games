@@ -1,0 +1,12 @@
+@use './utils' as *;
+@use './colors' as *;
+
+.editor {
+  width: 100%;
+  height: 100vh;
+
+  &-header {
+    @include vw-convert-desktop(height, 80px);
+    background-color: $white;
+  }
+}

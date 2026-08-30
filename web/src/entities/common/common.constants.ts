@@ -1,0 +1,16 @@
+export const URL = {
+  series: '/common/series',
+  singleSeries: '/common/series/single',
+  category: '/common/category',
+  mostViewdCategory: '/common/most/viewed/category',
+  freeSeriesCategory: '/common/free/series/category',
+  mostViewedSeries: '/common/most/viewed/series',
+  price: '/common/price-plan',
+  lastAddedChapters: '/common/chapters/last',
+  lastReadChapters: '/user/last/read',
+  specialSeriesList: '/common/special-series',
+  freeSeriesList: '/common/free-series',
+  getUserInfo: '/user/get/info',
+  comment: '/user/comment',
+  commentList: '/user/get/comment',
+};

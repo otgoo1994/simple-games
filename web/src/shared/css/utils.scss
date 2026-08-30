@@ -1,0 +1,86 @@
+@use 'sass:math';
+@use 'sass:list';
+
+// deUnit function
+@function deUnit($value) {
+  @return math.div($value, ($value * 0 + 1));
+}
+
+// --------------------
+// DESKTOP
+// --------------------
+$size--desktop: 1920;
+
+@mixin vw-convert-desktop($property, $pixel, $min: null, $max: null) {
+  @media screen and (min-width: 980px) {
+    @if list.length($pixel) == 1 {
+      #{$property}: math.div(deUnit($pixel) * 100, deUnit($size--desktop)) * 1vw;
+    } @else if list.length($pixel) == 2 {
+      #{$property}: math.div(deUnit(list.nth($pixel, 1)) * 100, deUnit($size--desktop)) *
+        1vw
+        math.div(deUnit(list.nth($pixel, 2)) * 100, deUnit($size--desktop)) *
+        1vw;
+    } @else if list.length($pixel) == 3 {
+      #{$property}: math.div(deUnit(list.nth($pixel, 1)) * 100, deUnit($size--desktop)) *
+        1vw
+        math.div(deUnit(list.nth($pixel, 2)) * 100, deUnit($size--desktop)) *
+        1vw
+        math.div(deUnit(list.nth($pixel, 3)) * 100, deUnit($size--desktop)) *
+        1vw;
+    } @else if list.length($pixel) == 4 {
+      #{$property}: math.div(deUnit(list.nth($pixel, 1)) * 100, deUnit($size--desktop)) *
+        1vw
+        math.div(deUnit(list.nth($pixel, 2)) * 100, deUnit($size--desktop)) *
+        1vw
+        math.div(deUnit(list.nth($pixel, 3)) * 100, deUnit($size--desktop)) *
+        1vw
+        math.div(deUnit(list.nth($pixel, 4)) * 100, deUnit($size--desktop)) *
+        1vw;
+    }
+  }
+
+  @media screen and (min-width: 1920px) {
+    #{$property}: $pixel;
+  }
+}
+
+// --------------------
+// MOBILE
+// --------------------
+$size--mobile: 720;
+
+@mixin vw-convert-mobile($property, $pixel) {
+  @if list.length($pixel) == 1 {
+    #{$property}: math.div(deUnit($pixel) * 100, deUnit($size--mobile)) * 1vw;
+  } @else if list.length($pixel) == 2 {
+    #{$property}: math.div(deUnit(list.nth($pixel, 1)) * 100, deUnit($size--mobile)) *
+      1vw
+      math.div(deUnit(list.nth($pixel, 2)) * 100, deUnit($size--mobile)) *
+      1vw;
+  } @else if list.length($pixel) == 3 {
+    #{$property}: math.div(deUnit(list.nth($pixel, 1)) * 100, deUnit($size--mobile)) *
+      1vw
+      math.div(deUnit(list.nth($pixel, 2)) * 100, deUnit($size--mobile)) *
+      1vw
+      math.div(deUnit(list.nth($pixel, 3)) * 100, deUnit($size--mobile)) *
+      1vw;
+  } @else if list.length($pixel) == 4 {
+    #{$property}: math.div(deUnit(list.nth($pixel, 1)) * 100, deUnit($size--mobile)) *
+      1vw
+      math.div(deUnit(list.nth($pixel, 2)) * 100, deUnit($size--mobile)) *
+      1vw
+      math.div(deUnit(list.nth($pixel, 3)) * 100, deUnit($size--mobile)) *
+      1vw
+      math.div(deUnit(list.nth($pixel, 4)) * 100, deUnit($size--mobile)) *
+      1vw;
+  }
+}
+
+// --------------------
+// MOBILE MIXIN
+// --------------------
+@mixin mobile {
+  @media only screen and (max-width: 980px) {
+    @content;
+  }
+}

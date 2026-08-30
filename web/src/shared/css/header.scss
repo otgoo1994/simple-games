@@ -1,0 +1,422 @@
+@use './utils' as *;
+@use './colors' as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: $bg-color;
+  border-bottom: 1px solid $slate-200;
+  @include vw-convert-desktop(height, 100px);
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+
+    @include mobile {
+      @include vw-convert-mobile(padding, 10px 0);
+    }
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    @include vw-convert-desktop(gap, 20px);
+
+    @include mobile {
+      @include vw-convert-mobile(gap, 20px);
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+
+    img {
+      @include vw-convert-desktop(height, 40px);
+      @include vw-convert-desktop(border-radius, 10px);
+      width: auto;
+
+      @include mobile {
+        @include vw-convert-mobile(height, 50px);
+        @include vw-convert-mobile(border-radius, 10px);
+      }
+    }
+  }
+
+  &__nav {
+    display: none;
+
+    @media (min-width: 768px) {
+      display: flex;
+      align-items: center;
+      @include vw-convert-desktop(gap, 20px);
+    }
+
+    &-link {
+      @include vw-convert-desktop(font-size, 16px);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: $slate-900;
+      transition: color 0.2s;
+      text-decoration: none;
+
+      &:hover {
+        color: $red;
+      }
+
+      &--active {
+        color: $red;
+        border-bottom: 1px solid $red;
+        transform: translateY(1px);
+      }
+    }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    @include vw-convert-desktop(gap, 10px);
+    color: $slate-900;
+  }
+
+  &__search {
+    position: relative;
+    display: none;
+
+    @media (min-width: 1024px) {
+      display: block;
+    }
+
+    &-input {
+      background-color: $slate-100;
+      // border-radius: 9999px;
+      @include vw-convert-desktop(padding, 8px 16px);
+      @include vw-convert-desktop(padding-right, 40px);
+      @include vw-convert-desktop(font-size, 12px);
+      @include vw-convert-desktop(width, 150px);
+      border: none;
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 1px $webtoon-color;
+      }
+    }
+
+    &-icon {
+      position: absolute;
+      @include vw-convert-desktop(right, 12px);
+      @include vw-convert-desktop(top, 8px);
+      @include vw-convert-desktop(top, 8px);
+      @include vw-convert-desktop(width, 14px);
+      @include vw-convert-desktop(height, 14px);
+      color: $slate-400;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    @include mobile {
+      display: none;
+    }
+
+    &-publish {
+      @include vw-convert-desktop(font-size, 14px);
+      font-weight: 700;
+    }
+
+    &-icons {
+      display: flex;
+      @include vw-convert-desktop(gap, 20px);
+
+      svg {
+        color: $slate-900;
+      }
+
+      @include mobile {
+        @include vw-convert-mobile(gap, 5px);
+      }
+
+      button {
+        cursor: pointer;
+        border: none;
+        background: none;
+        font-family: inherit;
+        display: flex;
+
+        &.burger-menu {
+          display: none;
+
+          @include mobile {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .profile-container {
+      position: relative;
+
+      .profile-menu {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        transform: translateY(110%);
+        background-color: $slate-200;
+        @include vw-convert-desktop(width, 200px);
+        @include vw-convert-desktop(border-radius, 5px);
+        @include vw-convert-desktop(padding, 5px);
+        display: none;
+
+        &.show {
+          display: block;
+        }
+
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          li {
+            @include vw-convert-desktop(padding, 10px 10px);
+            cursor: pointer;
+            &:hover {
+              background-color: $slate-300;
+            }
+          }
+        }
+      }
+    }
+
+    &-profile {
+      @include vw-convert-desktop(width, 32px);
+      @include vw-convert-desktop(height, 32px);
+      color: $white;
+      background-color: $dark-blue;
+      border: none;
+      cursor: pointer;
+
+      &.no-logged {
+        width: auto;
+        @include vw-convert-desktop(padding, 0 15px);
+      }
+    }
+  }
+
+  &__actions__mobile {
+    display: none;
+    align-items: center;
+    gap: 1.5rem;
+
+    @include mobile {
+      display: flex;
+    }
+
+    &-publish {
+      @include vw-convert-desktop(font-size, 14px);
+      font-weight: 700;
+    }
+
+    &-icons {
+      button {
+        cursor: pointer;
+        border: none;
+        background: none;
+        font-family: inherit;
+        display: flex;
+      }
+    }
+  }
+
+  .mobile-menu {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+
+    &.show {
+      display: flex;
+    }
+
+    &-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+
+      .dimmed {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: $slate-900;
+        opacity: 0.7;
+        z-index: -1;
+      }
+    }
+
+    &-body {
+      width: 90%;
+      @include vw-convert-mobile(height, 800px);
+      position: absolute;
+      left: 50%;
+      bottom: 3%;
+      transform: translateX(-50%);
+
+      &-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: $white;
+        @include vw-convert-mobile(border-radius, 40px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        ul {
+          list-style: none;
+          padding: 0;
+          width: 100%;
+          @include vw-convert-mobile(padding, 0px 50px);
+
+          li {
+            @include vw-convert-mobile(padding, 20px 0);
+            font-weight: 700;
+            border-bottom: 1px solid $slate-300;
+            display: flex;
+            justify-content: space-between;
+            color: $slate-700;
+
+            a {
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              text-decoration: none;
+              color: $slate-700;
+            }
+
+            &:last-child {
+              border: none;
+            }
+          }
+        }
+      }
+    }
+
+    &-close {
+      position: absolute;
+      background-color: transparent;
+      border: none;
+      @include vw-convert-mobile(width, 100px);
+      aspect-ratio: 1;
+      @include vw-convert-mobile(top, 20px);
+      @include vw-convert-mobile(right, 20px);
+      svg {
+        color: $slate-900;
+      }
+    }
+  }
+}
+
+.footer {
+  width: 100%;
+  @include vw-convert-desktop(height, 80px);
+  @include vw-convert-desktop(margin-top, 40px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid $slate-200;
+
+  @include mobile {
+    @include vw-convert-mobile(height, 100px);
+    @include vw-convert-mobile(margin-top, 20px);
+  }
+}
+
+.header-alert {
+  width: 100%;
+  @include vw-convert-desktop(height, 40px);
+  background-color: #1e1a33;
+  color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid $slate-200;
+  position: relative;
+
+  &.hide {
+    display: none;
+  }
+
+  p {
+    @include vw-convert-desktop(gap, 8px);
+    @include vw-convert-desktop(font-size, 15px);
+
+    @include mobile {
+      @include vw-convert-mobile(font-size, 23px);
+      text-align: center;
+    }
+
+    .mob-br {
+      display: none;
+
+      @include mobile {
+        display: block;
+      }
+    }
+
+    a {
+      color: $white;
+      @include vw-convert-desktop(gap, 5px);
+      border-bottom: 1px solid white;
+      text-decoration: none;
+
+      svg {
+        @include vw-convert-desktop(width, 15px);
+        @include vw-convert-desktop(height, 12px);
+
+        @include mobile {
+          @include vw-convert-mobile(width, 12px);
+          @include vw-convert-mobile(height, 12px);
+        }
+      }
+    }
+  }
+
+  @include mobile {
+    @include vw-convert-mobile(height, 100px);
+  }
+
+  button {
+    background-color: transparent;
+    border: none;
+    color: $white;
+    position: absolute;
+    cursor: pointer;
+    @include vw-convert-desktop(right, 10px);
+
+    @include mobile {
+      @include vw-convert-mobile(right, 10px);
+    }
+
+    svg {
+      @include vw-convert-desktop(width, 20px);
+      @include vw-convert-desktop(height, 20px);
+
+      @include mobile {
+        @include vw-convert-mobile(width, 30px);
+        @include vw-convert-mobile(height, 30px);
+      }
+    }
+  }
+}

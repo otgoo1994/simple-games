@@ -1,0 +1,68 @@
+/* ---------------------------- */
+/* Sass modules */
+
+@use './home';
+@use './floppy';
+@use './header';
+@use './editor';
+@use './colors' as *;
+@use './utils' as *;
+@use './fonts.scss'; /* ---------------------------- */ /* Google Fonts import */
+
+@import url('https://fonts.googleapis.com/css2?family=Iosevka+Charon:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+* {
+  font-family: 'GeologicaThin';
+  margin: 0;
+}
+
+html,
+body {
+  touch-action: manipulation;
+  font-family: 'Iosevka Charon', monospace;
+  font-weight: 700;
+  font-style: normal;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: $bg-color;
+}
+
+.container {
+  @include vw-convert-desktop(width, 1600px);
+  // max-width: 1200px;
+  margin: auto;
+
+  @include mobile {
+    max-width: 90%;
+  }
+}
+
+.webtoon-swiper-container {
+  position: relative;
+
+  .prev-btn,
+  .next-btn {
+    position: absolute;
+    top: 45%;
+    z-index: 99;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 1px solid $slate-400;
+    aspect-ratio: 1;
+    @include vw-convert-desktop(width, 35px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .prev-btn {
+    left: 0;
+    transform: translate(-50%, -50%);
+  }
+  .next-btn {
+    right: 0;
+    transform: translate(50%, -50%);
+  }
+}
