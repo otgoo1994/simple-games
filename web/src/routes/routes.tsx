@@ -5,6 +5,9 @@ import { PrivateRoute, AuthRoute } from "~/shared/utils";
 const HomePage = lazy(() =>
   import("~/pages/home").then((module) => ({ default: module.HomePage })),
 );
+const FallingPage = lazy(() =>
+  import("~/pages/falling").then((module) => ({ default: module.FallingPage })),
+);
 
 const Layout = lazy(() =>
   import("~/features/layouts").then((module) => ({ default: module.Layout })),
@@ -30,6 +33,11 @@ export const routes: CustomRouteObject[] = [
         path: "/",
         title: "Home",
         element: <HomePage />,
+      },
+      {
+        path: "/falling-game",
+        title: "Falling",
+        element: <FallingPage />,
       },
     ],
   },
