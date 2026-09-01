@@ -27,7 +27,7 @@ body {
 
 body {
   overflow-x: hidden;
-  background-color: $bg-color;
+  background-color: $grey;
 }
 
 .container {
@@ -37,33 +37,5 @@ body {
 
   @include mobile {
     max-width: 90%;
-  }
-}
-
-.webtoon-swiper-container {
-  position: relative;
-
-  .prev-btn,
-  .next-btn {
-    position: absolute;
-    top: 45%;
-    z-index: 99;
-    cursor: pointer;
-    border-radius: 50%;
-    border: 1px solid $slate-400;
-    aspect-ratio: 1;
-    @include vw-convert-desktop(width, 35px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .prev-btn {
-    left: 0;
-    transform: translate(-50%, -50%);
-  }
-  .next-btn {
-    right: 0;
-    transform: translate(50%, -50%);
   }
 }

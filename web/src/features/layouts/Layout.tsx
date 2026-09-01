@@ -10,6 +10,7 @@ export const Layout = () => {
   return (
     <div className="">
       <div className="">
+        <Header />
         <Outlet />
       </div>
     </div>

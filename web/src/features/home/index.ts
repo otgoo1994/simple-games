@@ -1,1 +1,1 @@
-export { Floppy } from './Home';
+export { Home } from './Home';

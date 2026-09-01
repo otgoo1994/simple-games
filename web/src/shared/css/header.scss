@@ -5,9 +5,9 @@
   position: sticky;
   top: 0;
   z-index: 999;
-  background-color: $bg-color;
+  background-color: $white;
   border-bottom: 1px solid $slate-200;
-  @include vw-convert-desktop(height, 100px);
+  @include vw-convert-desktop(height, 80px);
 
   &__inner {
     display: flex;
@@ -35,7 +35,7 @@
     align-items: center;
 
     img {
-      @include vw-convert-desktop(height, 40px);
+      @include vw-convert-desktop(height, 50px);
       @include vw-convert-desktop(border-radius, 10px);
       width: auto;
 
@@ -267,7 +267,7 @@
 
     &-body {
       width: 90%;
-      @include vw-convert-mobile(height, 800px);
+      @include vw-convert-mobile(height, 600px);
       position: absolute;
       left: 50%;
       bottom: 3%;

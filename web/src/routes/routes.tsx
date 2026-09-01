@@ -1,16 +1,16 @@
-import { lazy } from "react";
-import { RouteObject } from "react-router-dom";
-import { PrivateRoute, AuthRoute } from "~/shared/utils";
+import { lazy } from 'react';
+import { RouteObject } from 'react-router-dom';
+import { PrivateRoute, AuthRoute } from '~/shared/utils';
 
 const HomePage = lazy(() =>
-  import("~/pages/home").then((module) => ({ default: module.HomePage })),
+  import('~/pages/home').then((module) => ({ default: module.HomePage })),
 );
-const FallingPage = lazy(() =>
-  import("~/pages/falling").then((module) => ({ default: module.FallingPage })),
+const FlappyPage = lazy(() =>
+  import('~/pages/home').then((module) => ({ default: module.HomePage })),
 );
 
 const Layout = lazy(() =>
-  import("~/features/layouts").then((module) => ({ default: module.Layout })),
+  import('~/features/layouts').then((module) => ({ default: module.Layout })),
 );
 
 type CustomChildRouteObject = RouteObject & {
@@ -26,18 +26,24 @@ type CustomRouteObject = RouteObject & {
 
 export const routes: CustomRouteObject[] = [
   {
-    path: "/",
+    path: '/',
     element: <Layout />,
     children: [
       {
-        path: "/",
-        title: "Home",
+        path: '/',
+        title: 'Home',
         element: <HomePage />,
       },
+    ],
+  },
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
       {
-        path: "/falling-game",
-        title: "Falling",
-        element: <FallingPage />,
+        path: '/flappy',
+        title: 'Flappy',
+        element: <FlappyPage />,
       },
     ],
   },

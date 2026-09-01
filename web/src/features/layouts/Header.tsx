@@ -63,7 +63,7 @@ export const Header = () => {
 
   return (
     <header className="header">
-      <div className="webtoon-container header__inner container">
+      <div className="header__inner container">
         {/* Logo and Nav */}
         <div className="header__left">
           <div className="header__logo">
@@ -71,56 +71,34 @@ export const Header = () => {
               <img src="/images/logo.png" alt="" />
             </Link>
           </div>
+        </div>
 
+        <div className="header__middle">
           <nav className="header__nav">
             <Link
               to="/"
               className={`header__nav-link ${activeLink === '/' && 'header__nav-link--active'}`}
             >
-              ORIGINALS
+              НҮҮР
             </Link>
             <Link
               to="/category"
               className={`header__nav-link ${activeLink === '/category' && 'header__nav-link--active'}`}
             >
-              GATEGORIES
+              ДААЛГАВАР
             </Link>
             <Link
               to="/calendar"
               className={`header__nav-link ${activeLink === '/calendar' && 'header__nav-link--active'}`}
             >
-              SCHEDULE
-            </Link>
-            <Link
-              to="/price"
-              className={`header__nav-link ${activeLink === '/price' && 'header__nav-link--active'}`}
-            >
-              SUBSCIRPTION
+              МЭДЭЭЛЭЛ
             </Link>
           </nav>
         </div>
 
         <div className="header__right">
-          <div className="header__search">
-            <input
-              type="text"
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              placeholder="Search"
-              className="header__search-input"
-              onKeyDown={handleSearchSubmit}
-            />
-            <Search className="header__search-icon" />
-          </div>
-
           <div className="header__actions">
-            <div className="header__actions-icons">
-              <button title="Notifications">
-                <Bell className="icon-v" size={20} />
-              </button>
-            </div>
-
-            {loggedUser ? (
+            {loggedUser && (
               <div className="profile-container">
                 <button
                   title="Profile"
@@ -150,21 +128,11 @@ export const Header = () => {
                   </ul>
                 </div>
               </div>
-            ) : (
-              // <p>hello, Oogii</p>
-              <Link to="/login">
-                <button title="Profile" className="header__actions-profile no-logged">
-                  Нэвтрэх
-                </button>
-              </Link>
             )}
           </div>
 
           <div className="header__actions__mobile">
             <div className="header__actions-icons">
-              <button title="Notifications">
-                <Bell className="icon-v" size={20} />
-              </button>
               <button
                 title="Burger"
                 className="burger-menu"
@@ -189,45 +157,24 @@ export const Header = () => {
               <ul>
                 <li>
                   <Link to="/">
-                    ORIGINALS <ChevronRight className="icon-v" size={20} />
+                    НҮҮР <ChevronRight className="icon-v" size={20} />
                   </Link>
                 </li>
                 <li>
                   <Link to="/category">
-                    CATEGORIES <ChevronRight className="icon-v" size={20} />
+                    ДААЛГАВАР <ChevronRight className="icon-v" size={20} />
                   </Link>
                 </li>
-                {userInfo && userInfo.data && (
-                  <>
-                    <li>
-                      Багц: <b>{userInfo.data.plan != 1 ? 'VIP' : userInfo.data.plan_name}</b>
-                    </li>
-                    <li>
-                      Үлдсэн хоног: <b>{timeDistanceWithDays(userInfo.data.expires_date)}</b>
-                    </li>
-                  </>
-                )}
                 <li>
                   <Link to="/calendar">
-                    SCHEDULE <ChevronRight className="icon-v" size={20} />
+                    МЭДЭЭЛЭЛ <ChevronRight className="icon-v" size={20} />
                   </Link>
                 </li>
                 <li>
                   <Link to="/price">
-                    SUBSCIRPTION <ChevronRight className="icon-v" size={20} />
+                    ПРОФАЙЛ <ChevronRight className="icon-v" size={20} />
                   </Link>
                 </li>
-                {loggedUser ? (
-                  <li onClick={handleLogout}>
-                    LOGOUT <ChevronRight className="icon-v" size={20} />
-                  </li>
-                ) : (
-                  <li>
-                    <Link to="/login">
-                      Нэвтрэх <ChevronRight className="icon-v" size={20} />
-                    </Link>
-                  </li>
-                )}
               </ul>
             </div>
           </div>

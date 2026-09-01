@@ -8,6 +8,8 @@ import { useNetworkOffline } from './error/useNetworkOffline';
 import { Toaster } from 'sonner';
 import { LayoutProvider } from '~/shared/contexts';
 import { Loading } from '~/shared/components';
+import '@mantine/core/styles.css';
+import { createTheme, MantineProvider } from '@mantine/core';
 
 const App = () => {
   useEffect(() => {
@@ -34,17 +36,21 @@ const App = () => {
   );
 
   useEffect(() => {}, []);
+
+  const theme = createTheme({/** Your theme override here */});
   return (
-    <LayoutProvider>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Toaster richColors position="top-right" />
-          <Suspense fallback={<Loading />}>
-            <Routes />
-          </Suspense>
-        </BrowserRouter>
-      </QueryClientProvider>
-    </LayoutProvider>
+    <MantineProvider theme={theme}>
+      <LayoutProvider>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <Toaster richColors position="top-right" />
+            <Suspense fallback={<Loading />}>
+              <Routes />
+            </Suspense>
+          </BrowserRouter>
+        </QueryClientProvider>
+      </LayoutProvider>
+    </MantineProvider>
   );
 };
 
